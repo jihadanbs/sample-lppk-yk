@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { ShoppingCart, FileText, Users, CheckCircle, Clock, Package, Download, Printer, ChevronRight, Menu, X, Home, ClipboardList } from 'lucide-react';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+interface NavItem {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+}
 
-  const navigation = [
+function App() {
+  const [currentPage, setCurrentPage] = useState<string>('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
+  const navigation: NavItem[] = [
     { id: 'home', label: 'Beranda', icon: Home },
     { id: 'proses', label: 'Proses Pengajuan', icon: ClipboardList },
   ];
@@ -90,7 +96,11 @@ function App() {
   );
 }
 
-function HomePage({ setCurrentPage }) {
+interface HomePageProps {
+  setCurrentPage: (page: string) => void;
+}
+
+function HomePage({ setCurrentPage }: HomePageProps) {
   const features = [
     {
       icon: CheckCircle,
@@ -288,7 +298,7 @@ function HomePage({ setCurrentPage }) {
 }
 
 function ProsesPage() {
-  const [expandedStep, setExpandedStep] = useState(null);
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
 
   const steps = [
     {
